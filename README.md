@@ -32,7 +32,7 @@ Jira-TimeReport.ps1 -StartDate "<yyyy-mm-dd>" -EndDate "<yyyy-mm-dd>"
 ```
 
 Example-output:
-$[display of different issue-IDs and times](example_output.png "Example output")
+![display of different issue-IDs and times](example_output.png "Example output")
 
 ## Endpoints
 
