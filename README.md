@@ -2,6 +2,17 @@
 
 Sums all the seconds the user spent working on issues and reports that is part of the current sprint. Useful for gathering statistics right before a sprint-review.
 
+
+## Use
+
+```
+Jira-TimeReport.ps1 -StartDate "<yyyy-mm-dd>" -EndDate "<yyyy-mm-dd>"
+```
+
+Example-output:
+
+![display of different issue-IDs and times](example_output.png "Example output")
+
 ## Installation
 
 To use this script, you need to create a Jira API-key.
@@ -24,16 +35,6 @@ Install the gathered information into your script
 - Paste the secret reference into the script where it says `$apiKey = op read "<secret reference>"`. Notice that it might be a previously used secret reference here. This can and should be replaced.
 - Do the same for your cloud Id for the place in the script where it says `$cloudId = op read "<secret reference>"`
 - Finally insert your email in the "username"-field, copy the secret reference and paste it into the script where it says `$username = op read "<secret reference>"`.
-
-## Use
-
-```
-Jira-TimeReport.ps1 -StartDate "<yyyy-mm-dd>" -EndDate "<yyyy-mm-dd>"
-```
-
-Example-output:
-![display of different issue-IDs and times](example_output.png "Example output")
-
 ## Endpoints
 
 This script collects information from Jira using the Atlassian-endpoints below.
