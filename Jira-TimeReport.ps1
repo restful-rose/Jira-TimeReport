@@ -20,16 +20,21 @@ $endDateTime = [DateTime]::ParseExact($EndDate, $inputFormat, $null)
 $endDateTime = $endDateTime.Date.AddHours(23).AddMinutes(59)
 $endDateTimeOffset = [DateTimeOffset]::new($endDateTime)
 
-$apiKey = op read "op://Employee/Jira Time-tracking API-token/credential"
-$username = op read "op://Employee/Jira Time-tracking API-token/username"
+$apiKey = op read "op://Employee/Jira TimeReport Scoped API Token/credential"
+$username = op read "op://Employee/Jira TimeReport Scoped API Token/username"
+$cloudId = op read "op://Employee/Jira TimeReport Scoped API Token/cloudId"
 
 $text = "${username}:$apiKey"
 $bytes = [System.Text.Encoding]::UTF8.GetBytes($text)
 $encodedText = [Convert]::ToBase64String($bytes)
 
-$accountUri = "https://nveprojects.atlassian.net/rest/api/3/myself"
+# When using un-scoped API-keys we will use the following base URI:
+#$baseUri = "https://nveprojects.atlassian.net/"
+# For scoped API-keys, we need to use the following base URI:
+$baseUri = "https://api.atlassian.com/ex/jira/$cloudId"
+$accountUri = "$baseUri/rest/api/3/myself"
 
-$uri = "https://nveprojects.atlassian.net/rest/api/3/search/jql?jql=worklogAuthor=currentUser()%20AND%20sprint%20in%20openSprints()&fields=id,key"
+$uri = "$baseUri/rest/api/3/search/jql?jql=worklogAuthor=currentUser()%20AND%20sprint%20in%20openSprints()&fields=id,key"
 
 $headers = @{
     Authorization = "Basic $encodedText"
@@ -58,7 +63,7 @@ $sumSeconds = 0
 foreach ($issue in $issues) {
     $id = $issue.id
     $key = $issue.key
-    $issueUri = "https://nveprojects.atlassian.net/rest/api/3/issue/${id}/worklog"
+    $issueUri = "$baseUri/rest/api/3/issue/${id}/worklog"
     $res = Invoke-WebRequest -Uri $issueUri -Method Get -Headers $headers
 
     $content = $res.Content | ConvertFrom-Json
