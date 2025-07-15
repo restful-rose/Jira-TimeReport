@@ -1,6 +1,6 @@
 # Jira-TimeReport
 
-Sums all the seconds the user spent working on issues and reports that.
+Sums all the seconds the user spent working on issues and reports that is part of the current sprint. Useful for gathering statistics right before a sprint-review.
 
 ## Installation
 
@@ -30,6 +30,9 @@ Install the gathered information into your script
 ```
 Jira-TimeReport.ps1 -StartDate "<yyyy-mm-dd>" -EndDate "<yyyy-mm-dd>"
 ```
+
+Example-output:
+$[display of different issue-IDs and times](example_output.png "Example output")
 
 ## Endpoints
 
