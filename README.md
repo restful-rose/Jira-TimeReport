@@ -15,9 +15,8 @@ To use this script, you need to create a Jira API-key.
 
 For maximum security, we will be using
 a scoped Jira API-key, which means you also have to get the *cloudId*/*tenantId* for your instance.
-- Go to e.g. `https://<tenant name>.atlassian.net`
-- Look in developer tools and search for `cloudId`
-- In the GET requests, there will be a parameter called `...&tenantId=<cloudId>&tenantIdType=cloudId`. This is your cloud Id
+- In your browser, go to `https://<tenant name>.atlassian.net/_edge/tenant_info`.
+- This will give your your *cloudId* for your tenant (also known as *tenantId*).
 - Copy the cloud Id to a separate field in your 1Password vault entry.
 
 Install the gathered information into your script
