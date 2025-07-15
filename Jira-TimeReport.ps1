@@ -87,6 +87,8 @@ foreach ($issue in $issues) {
     }
 }
 
+$timespanFormat = "HH:mm:ss"
 $timespan = [TimeSpan]::FromSeconds($sumSeconds)
-Write-Host "`nTotal number of seconds: $sumSeconds ($($timespan.ToString()))`n"
+$timespanString = "{0:D3}:{1:D2}:{2:D2}" -f [int]$timespan.TotalHours, $timespan.Minutes, $timespan.Seconds
+Write-Host "`nTotal number of seconds: $sumSeconds ($timespanString)`n"
 
